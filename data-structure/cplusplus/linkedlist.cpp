@@ -24,20 +24,36 @@ class Solution{
             node* newNode = new node(val);
             head->next = newNode;
         }
+        node* reverse(node* head){
+            node *prev = nullptr, *rest;
+            while(head){
+                rest = head->next;
+                head->next = prev;
+                prev = head;
+                head = rest;
+            }
+            head = prev;
+            return head;
+        }
+        void show(node* head){
+            while(head){
+                cout<<head->val<<" ";
+                head = head->next;
+            }
+            cout<<endl;
+        }
 };
 
 int main(){
     Solution solve;
     node* head = new node();
 
-    for(int i=0; i<20; i++){
+    for(int i=0; i<5; i++){
         solve.insert(head, i);
     }
-
-    while(head){
-        cout<<head->val<<endl;
-        head = head->next;
-    }
+    solve.show(head);
+    head = solve.reverse(head);
+    solve.show(head);
 
     return 0;
 }
